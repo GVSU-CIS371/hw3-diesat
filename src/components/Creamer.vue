@@ -1,18 +1,17 @@
 <template>
   <div class="froth">
-    <div
-      v-for=" in 5"
-      class="foam"
-      :style="{ backgroundColor: beverageStore.currentCreamer?.color }"
-    ></div>
+    <div v-for="n in 5" :key="n" class="foam" :style="{ backgroundColor: creamerColor }"></div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useBeverageStore } from "../stores/beverageStore";
+interface Props {
+  creamerColor: string;
+}
 
-const beverageStore = useBeverageStore();
+defineProps<Props>();
 </script>
+
 <style lang="scss" scoped>
 .froth {
   overflow: visible;
@@ -25,11 +24,11 @@ const beverageStore = useBeverageStore();
 }
 .foam {
   display: block;
-  background: #e4e0d2;
   border-radius: 30px;
   height: 40px;
   width: 40px;
   position: absolute;
+  transition: background-color 0.5s ease;
 }
 
 .foam:nth-child(1) {
