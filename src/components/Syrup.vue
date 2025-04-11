@@ -1,15 +1,15 @@
 <template>
-  <div
-    class="syrup"
-    :style="{ '--texture-color': beverageStore.currentSyrup?.color }"
-  ></div>
+  <div class="syrup" :style="{ '--texture-color': syrupColor }"></div>
 </template>
 
 <script setup lang="ts">
-import { useBeverageStore } from "../stores/beverageStore";
+interface Props {
+  syrupColor: string;
+}
 
-const beverageStore = useBeverageStore();
+defineProps<Props>();
 </script>
+
 <style lang="scss" scoped>
 .syrup {
   transform: translateY(400%);
@@ -20,10 +20,11 @@ const beverageStore = useBeverageStore();
   z-index: 2;
   background: repeating-linear-gradient(
     45deg,
-    var(--texture-color),
-    var(--texture-color) 10px,
+    var(--texture-color, #c6c6c6),
+    var(--texture-color, #c6c6c6) 10px,
     rgba(225, 207, 149, 1) 10px,
     rgba(225, 207, 149, 1) 20px
   );
+  transition: background 0.5s ease;
 }
 </style>
